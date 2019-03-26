@@ -1,0 +1,6 @@
+Agent,Action
+Households,workAndProduce
+Households,buyGood
+Households,buyBond
+Households,interactWithStockMarket
+Firms,evaluateAveragePreviousPrice

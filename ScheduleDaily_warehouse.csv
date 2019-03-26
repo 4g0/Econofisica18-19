@@ -1,0 +1,9 @@
+Agent,Action
+Households,workAndProduce
+Households,evaluatePastConsumption
+Households,buyGood
+Households,buyBond
+Households,interactWithStockMarket
+Households,checkBondPriceAndConvert
+Firms,modifyPriceBasedOnInterest
+Firms,evaluateAveragePreviousPrice
