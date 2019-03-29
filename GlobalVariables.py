@@ -39,6 +39,9 @@ unemployment = True
 
 #global variables
 
+#name for the figure saving
+nameForFigSaving = ""
+
 #url for the schedule of a single day, see README for other info
 urlOfTheDailySchedule = "ScheduleDaily_euphoria_and_warehouse.csv"#"ScheduleDaily_euphoria.csv" #"ScheduleDaily_warehouse.csv" 
 

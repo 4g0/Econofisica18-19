@@ -4,8 +4,6 @@
 # In[1]:
 
 
-name = "IR1_All"
-
 import import_ipynb
 import GlobalVariables as common
 
@@ -86,88 +84,23 @@ for cycle in range(common.numberOfCycles):
 
 
 #ir section
-interestRateSchedule = pd.read_csv(common.urlOfInterestRateSchedule)
-interestRateList = []
-for tick in range(common.numberOfCycles):
-    stopping = False
-    for timeIndex in range(len(interestRateSchedule)):
-        tickThreshold = interestRateSchedule.iloc[timeIndex]["Tick"]
-        if tick < tickThreshold and stopping == False:
-            scheduledInterestRate = interestRateSchedule.iloc[timeIndex]["Rate"]
-            if scheduledInterestRate == "High":
-                IntRate = 3
-            elif scheduledInterestRate == "Medium":
-                IntRate = 2
-            elif scheduledInterestRate == "Low":
-                IntRate = 1
-            interestRateList.append(IntRate)
-            stopping = True
-                    
-plt.figure(figsize=(13, 8))
-plt.title("Interest Rate")
-plt.xlabel("Cycle")
-plt.ylabel("Interest Rate")
-plt.plot(range(common.numberOfCycles) , interestRateList)
-plt.savefig("interestRate_" + str(name))
-plt.show()
+environment.plotOfInterestRate()
 
 
 # In[10]:
 
 
-plt.figure(figsize = (13,8))
-plt.title("Price for goods")
-for f in environment.firmList:
-    plt.plot(f.listOfAveragePreviousPrices, alpha = 0.4)
-    plt.legend(environment.firmList)
-aaa = np.array([firm.listOfAveragePreviousPrices for firm in environment.firmList])
-avg = [sum(day)/len(day) for day in aaa.T]
-plt.plot(range(len(avg)) , avg, "r")
-plt.xlabel("Tick")
-plt.ylabel("Unit")
-plt.savefig("price_"+ str(name))
-plt.show()
+environment.plotOfPriceForGoods()
 
 
 # In[11]:
 
 
-environment.PriceForGoodsHistogram()
+#environment.PriceForGoodsHistogram()
 
 
 # In[12]:
 
 
-from mpl_finance import candlestick_ohlc
-
-plt.figure(figsize = (21,13))
-
-
-numberOfBooks = len(environment.bookList)
-
-for index in range(numberOfBooks): 
-    plt.subplot(2,2,index+1)
-    
-    ohlc_values = []
-    plt.title(environment.bookList[index])
-    plt.ylabel('tick')
-    plt.xlabel('Price')
-    for tick in range(common.numberOfCycles):
-        
-        # time, open, high, low, close
-        if environment.bookList[index].historicList[tick][0] == None:
-            high = 0
-        else:
-            high = environment.bookList[index].historicList[tick][0]
-        if environment.bookList[index].historicList[tick][1] == None:
-            low = 0
-        else:
-            low = environment.bookList[index].historicList[tick][1]
-        opn = environment.bookList[index].historicList[tick][2]
-        cls = environment.bookList[index].historicList[tick][3]
-        ohlc_values.append([tick, opn, high, low , cls])
-    #axarr[index].set_ylim([,120])
-    candlestick_ohlc(plt.subplot(2,2,index+1), ohlc_values, width=1, colorup='b', colordown='r')
-plt.savefig("shares_" + str(name))
-plt.show()
+environment.candlestickForShares()
 

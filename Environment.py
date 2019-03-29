@@ -447,8 +447,73 @@ class Environment:
         self.influenceInATurnDic = {}
 
 
-# In[3]:
+    def candlestickForShares(self):
+        plt.figure(figsize = (21,13))
+        numberOfBooks = len(self.bookList)
 
+        for index in range(numberOfBooks): 
+            plt.subplot(2,2,index+1)
 
-#environment.drawGraphOfTheCycle()
+            ohlc_values = []
+            plt.title(self.bookList[index])
+            plt.xlabel('tick')
+            plt.ylabel('Price')
 
+            for tick in range(common.numberOfCycles):
+
+                # time, open, high, low, close
+                if self.bookList[index].historicList[tick][0] == None:
+                    high = 0
+                else:
+                    high = self.bookList[index].historicList[tick][0]
+                if self.bookList[index].historicList[tick][1] == None:
+                    low = 0
+                else:
+                    low = self.bookList[index].historicList[tick][1]
+                opn = self.bookList[index].historicList[tick][2]
+                cls = self.bookList[index].historicList[tick][3]
+                ohlc_values.append([tick, opn, high, low , cls])
+
+            candlestick_ohlc(plt.subplot(2,2,index+1), ohlc_values, width=1, colorup='b', colordown='r')
+        plt.savefig("shares_" + str(common.nameForFigSaving))
+        plt.show()
+
+    def plotOfPriceForGoods(self):
+        plt.figure(figsize = (13,8))
+        plt.title("Price for goods")
+        for f in self.firmList:
+            plt.plot(f.listOfAveragePreviousPrices, alpha = 0.4)
+            plt.legend(self.firmList)
+        aaa = np.array([firm.listOfAveragePreviousPrices for firm in self.firmList])
+        avg = [sum(day)/len(day) for day in aaa.T]
+        plt.plot(range(len(avg)) , avg, "r")
+        plt.xlabel("Tick")
+        plt.ylabel("Unit")
+        plt.savefig("price_"+ str(common.nameForFigSaving))
+        plt.show()
+        
+    def plotOfInterestRate(self):
+        interestRateSchedule = pd.read_csv(common.urlOfInterestRateSchedule)
+        interestRateList = []
+        for tick in range(common.numberOfCycles):
+            stopping = False
+            for timeIndex in range(len(interestRateSchedule)):
+                tickThreshold = interestRateSchedule.iloc[timeIndex]["Tick"]
+                if tick < tickThreshold and stopping == False:
+                    scheduledInterestRate = interestRateSchedule.iloc[timeIndex]["Rate"]
+                    if scheduledInterestRate == "High":
+                        IntRate = 3
+                    elif scheduledInterestRate == "Medium":
+                        IntRate = 2
+                    elif scheduledInterestRate == "Low":
+                        IntRate = 1
+                    interestRateList.append(IntRate)
+                    stopping = True
+
+        plt.figure(figsize=(13, 8))
+        plt.title("Interest Rate")
+        plt.xlabel("Tick")
+        plt.ylabel("Interest Rate")
+        plt.plot(range(common.numberOfCycles) , interestRateList)
+        plt.savefig("interestRate_" + str(common.nameForFigSaving))
+        plt.show()
