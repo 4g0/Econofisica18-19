@@ -1,0 +1,6 @@
+numpy
+matplotlib
+seaborn
+networkx pandas 
+mpl_finance
+import_ipynb
