@@ -1,5 +1,6 @@
 numpy
 matplotlib
 seaborn
-networkx pandas 
+networkx 
+pandas 
 import_ipynb
