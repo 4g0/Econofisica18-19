@@ -1,22 +1,8 @@
-
 # coding: utf-8
-
-# In[1]:
-
-
-import import_ipynb
-
-
-# In[2]:
-
 
 import numpy as np
 import pandas as pd
 import GlobalVariables as common
-
-
-# In[3]:
-
 
 def workAndProduce(anHousehold, *argv):
     """
@@ -80,6 +66,7 @@ def buyGood(anHousehold, *argv):
     """
     An Household, try to buy goods from a Firm choosen andomly, based on some constraints 
     (disposable income, enough stockpile), with an adaptment of the inner price for goods.
+    If unemployed,the household buys with less probability
     
     parameters:
     anHousehold (Household): an instance of the class Household
@@ -292,7 +279,7 @@ def interactWithStockMarket(anHousehold, *argv):
         if action == "Ask" and anHousehold.stockForSharesOfFirms[indexOfCurrentInteraction] > 0:
             if common.verbose:
                 print("\t", anHousehold, "is doing action Ask with price", price, "for shares of the firm", booksByPreference[i])
-            matched, interactingHouseholdAndPrice = booksByPreference[i].collectOffer(anHousehold, price, action) ###---MANCA DA DEFINIRE I PREZZI
+            matched, interactingHouseholdAndPrice = booksByPreference[i].collectOffer(anHousehold, price, action) 
             
             if matched:
                 #the interaction
@@ -321,7 +308,8 @@ def interactWithStockMarket(anHousehold, *argv):
         if action == "Bid" and anHousehold.disposableSavings>price:
             if common.verbose:
                 print("\t", anHousehold, "is doing action Bid with price", price,"for shares of the firm", booksByPreference[i])
-            matched, interactingHouseholdAndPrice = booksByPreference[i].collectOffer(anHousehold, price, action) ###---MANCA DA DEFINIRE I PREZZI
+            matched, interactingHouseholdAndPrice = booksByPreference[i].collectOffer(anHousehold, price, action) 
+            
             if matched:
                 interactingHousehold = interactingHouseholdAndPrice[0]
                 interactingPrice = interactingHouseholdAndPrice[1]
@@ -460,7 +448,7 @@ def checkBondPriceAndConvert(anHousehold, *argv):
                 variance = (len(booksByPreference[index].askList) - len(booksByPreference[index].bidList))*0.005
                 price = np.random.normal(loc = lastPrice, scale = np.sqrt(abs(variance)))
                 
-                matched, interactingHouseholdAndPrice = booksByPreference[index].collectOffer(anHousehold, price, action) ###---MANCA DA DEFINIRE I PREZZI
+                matched, interactingHouseholdAndPrice = booksByPreference[index].collectOffer(anHousehold, price, action) 
 
                 if matched:
                     #the interaction
@@ -501,7 +489,7 @@ def checkBondPriceAndConvert(anHousehold, *argv):
                 variance = (len(booksByPreference[index].askList) - len(booksByPreference[index].bidList))*0.005
                 price = np.random.normal(loc = lastPrice, scale = np.sqrt(abs(variance)))
                 
-                matched, interactingHouseholdAndPrice = booksByPreference[index].collectOffer(anHousehold, price, action) ###---MANCA DA DEFINIRE I PREZZI
+                matched, interactingHouseholdAndPrice = booksByPreference[index].collectOffer(anHousehold, price, action) 
 
                 if matched:
                     #the interaction

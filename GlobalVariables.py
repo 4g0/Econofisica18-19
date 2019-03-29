@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[1]:
-
-
 #inputs from user
 
 #number of cycles for the simulation
@@ -34,19 +28,20 @@ probabilityOfConnection = 0.15
 unemployment = True
 
 
-# In[2]:
+
+
 
 
 #global variables
 
-#name for the figure saving
-nameForFigSaving = ""
+#name for the saved figure
+nameForFigSaving = "IR3_All"
 
 #url for the schedule of a single day, see README for other info
 urlOfTheDailySchedule = "ScheduleDaily_euphoria_and_warehouse.csv"#"ScheduleDaily_euphoria.csv" #"ScheduleDaily_warehouse.csv" 
 
 #url for the schedule of interest rates
-urlOfInterestRateSchedule = "ScheduleInterestRates.csv"
+urlOfInterestRateSchedule = "ScheduleInterestRates3.csv"
 
 #current interest rate
 currentInterestRate = "Medium"

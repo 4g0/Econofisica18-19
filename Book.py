@@ -1,15 +1,7 @@
-
 # coding: utf-8
-
-# In[1]:
-
 
 import GlobalVariables as common
 import numpy as np
-
-
-# In[1]:
-
 
 class Book:
     

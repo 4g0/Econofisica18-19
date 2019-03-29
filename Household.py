@@ -1,15 +1,8 @@
-
 # coding: utf-8
-
-# In[1]:
-
-
 import import_ipynb
 import GlobalVariables as common
 import numpy as np
 
-
-# In[2]:
 
 
 class Household:
@@ -21,7 +14,6 @@ class Household:
         parameters:
         tyeOfAgent (str): can be either "Trend" or "Numb"
         priceForGoods (float): the inner price for goods
-        thresh                        #################
         nameOfTheAgent (str): the name of the agent
         disposableIncome (float): the disposable income of the agent
         """

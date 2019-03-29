@@ -1,17 +1,10 @@
-
 # coding: utf-8
-
-# In[10]:
 
 
 import import_ipynb
 
 import GlobalVariables as common
 import numpy as np
-
-
-# In[27]:
-
 
 class Firm:
     
