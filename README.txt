@@ -8,8 +8,6 @@ The purpose of this model is to study, through agent-based simulation:
 HOW TO SET
 It is possible to choose the schedules of the interest rate and of the actions executed by agents. For the interest rate schedule, you can set the interest rate (Low, Medium, High) and how many cycles it should remain (i.e. 50 cycles). For the actions schedule, you can set the actions that will execute the agents and their order of execution, specifying the type of agent and the action.
 
-The default names for these csv files are: "ScheduleInterestRates.csv" and "ScheduleDailyVanilla.csv", modifiables in the Python file called GlobalVariables. 
-
 HOW TO USE
 You can start the execution of the model with the Model.ipynb file. 
 
