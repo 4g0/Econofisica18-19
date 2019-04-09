@@ -5,4 +5,3 @@ networkx
 pandas 
 mpl_finance
 import_ipynb
-math
