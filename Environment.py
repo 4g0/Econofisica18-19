@@ -18,6 +18,8 @@ if common.unemployment:
     from ActionsU import *
 else:
     from Actions import *
+    
+import math
 
 
 class Environment:
@@ -28,7 +30,7 @@ class Environment:
         """
         if common.verbose:
             print("The environment has been created")
-        self.time = 1
+        self.time = 0
         self.householdList = []
         self.firmList = []
         self.bookList = []
@@ -42,13 +44,17 @@ class Environment:
         self.connectionsInATurn = []
         self.influenceInATurnDic = {}
         
+        self.completed = 0
+        self.step = ( common.numberOfCycles // 100 ) * 5
+        self.number_of_steps = common.numberOfCycles // self.step
+        
     def tick(self):
         """
         Make the environment clock do one tick
         """
         self.time += 1
         if common.verbose:
-            print("TICK = ", self.time)
+            print("TICK = ", self.time+1)
             
     def computeUnemployment(self):
         """
@@ -219,6 +225,14 @@ class Environment:
         #compute the unemployment
         if common.unemployment:
             self.computeUnemployment()
+            
+        if self.time % self.step == 0:
+            if self.time == 0: print("Simulation started")
+            print("\t\t["+ " * "*self.completed +  " - "*(self.number_of_steps-self.completed) +"]")
+            self.completed += 1
+        if self.time + 1 == common.numberOfCycles:
+            print("\t\t["+ " * "*(self.completed) +"]")
+            print("Simulation completed.")
             
         #a tick
         self.tick()
@@ -484,11 +498,12 @@ class Environment:
         """
         plot of the price for the shares of all the firms in the cycles
         """
-        plt.figure(figsize = (21,13))
         numberOfBooks = len(self.bookList)
+        plt.figure(figsize = (21,13*numberOfBooks/3))
+        
 
         for index in range(numberOfBooks): 
-            plt.subplot(2,2,index+1)
+            plt.subplot(math.ceil(numberOfBooks/2),2,index+1)
 
             ohlc_values = []
             plt.title(self.bookList[index])
@@ -510,7 +525,7 @@ class Environment:
                 cls = self.bookList[index].historicList[tick][3]
                 ohlc_values.append([tick, opn, high, low , cls])
 
-            candlestick_ohlc(plt.subplot(2,2,index+1), ohlc_values, width=1, colorup='b', colordown='r')
+            candlestick_ohlc(plt.subplot(math.ceil(numberOfBooks/2), 2 ,index+1), ohlc_values, width=1, colorup='b', colordown='r')
         plt.savefig("shares_" + str(common.nameForFigSaving))
         plt.show()
 
