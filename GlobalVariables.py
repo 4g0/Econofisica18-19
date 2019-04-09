@@ -4,28 +4,28 @@
 numberOfCycles = 1
 
 #number of agents instance of the class Households
-numberOfHouseholds = 20
+numberOfHouseholds = 100
 
 #percentage of random agents
 percentageOfNumbAgents = 50
 
 #number of agents instance of the class Firms
-numberOfFirms = 3
+numberOfFirms = 4
 
 #seed for random value
 seed = 0
 
 #boolean variable for verbose
-verbose = True
+verbose = False
 
 #boolean variable for network structure
-network = True
+network = False
 
 #probability of connection in the network structure
 probabilityOfConnection = 0.15
 
 #unemployment
-unemployment = True
+unemployment = False
 
 
 
@@ -35,13 +35,12 @@ unemployment = True
 #global variables
 
 #name for the saved figure
-nameForFigSaving = "IR3_All"
+nameForFigSaving = ""
 
 #url for the schedule of a single day, see README for other info
-urlOfTheDailySchedule = "ScheduleDaily_euphoria_and_warehouse.csv"#"ScheduleDaily_euphoria.csv" #"ScheduleDaily_warehouse.csv" 
-
+urlOfTheDailySchedule = "ScheduleDailyVanilla.csv"
 #url for the schedule of interest rates
-urlOfInterestRateSchedule = "ScheduleInterestRates3.csv"
+urlOfInterestRateSchedule = "ScheduleInterestRates.csv"
 
 #current interest rate
 currentInterestRate = "Medium"
